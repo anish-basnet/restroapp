@@ -18,58 +18,70 @@ export type ErrorType = {
 };
 
 export const Slider = () => {
-    const containerRef = useRef<HTMLUListElement>(null);
-    const handleRightClick = () => {
-      if (containerRef.current) {
-        containerRef.current.scrollTo({
-          left: containerRef.current.scrollLeft +200,
-          behavior: 'smooth',
-        })
-      }
-    };
-    const handleLeftClick = () => {
-      if (containerRef.current) {
-        containerRef.current.scrollTo({
-          left: containerRef.current.scrollLeft -200,
-          behavior: 'smooth',
-        })
-      }
-    };
-  const {productCategories} = useLoaderContext();
+  const containerRef = useRef<HTMLUListElement>(null);
+  const handleRightClick = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft + 200,
+        behavior: "smooth",
+      });
+    }
+  };
+  const handleLeftClick = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft - 200,
+        behavior: "smooth",
+      });
+    }
+  };
+  const { productInfo } = useLoaderContext();
 
   useEffect(() => {
-  console.log("Product Category from slider.tsx is ", productCategories)
-
-  }, [productCategories]);
-  if (!productCategories){
-    return null
+    console.log("Product Category from slider.tsx is ", productInfo);
+  }, [productInfo]);
+  if (!productInfo) {
+    return null;
   }
 
   return (
     <div className="flex container-flex shadow-lg">
-      <IoChevronBackOutline onClick={handleLeftClick} className="text-3xl cursor-pointer" />
-      {productCategories && "payload" in productCategories && Array.isArray(productCategories.payload) ? (
-        <ul className="ul-scrollbar"  ref={containerRef}>
+      <IoChevronBackOutline
+        onClick={handleLeftClick}
+        className="text-3xl cursor-pointer"
+      />
+      {productInfo && "payload" in productInfo ? (
+        <ul className="ul-scrollbar" ref={containerRef}>
           <li className="truncate font-bold px-2 h-10 align-top text-orange-500">
             <a href={`content-0`} className="relative">
               Popular
-            <span className="absolute inset-x-0 bottom-0 h-[2.5px] bg-orange-500 translate-y-4 "></span>
-
+              <span className="absolute inset-x-0 bottom-0 h-[2.5px] bg-orange-500 translate-y-4 "></span>
             </a>
           </li>
-          {productCategories.payload.map((item: PayloadType) => (
-            <li
-              className="font-bold truncate px-2 hover:cursor-pointer"
-              key={item.id}
-            >
-              <a href={`content-${item.id}`}>{item.category}</a>
-            </li>
+          {Object.keys(productInfo.payload).map((category) => (
+            <>
+            {
+              Array.isArray(productInfo.payload[category]) && productInfo.payload[category].length ? (
+                <>
+                <li
+                  className="font-bold truncate px-2 hover:cursor-pointer"
+                  key={category}
+                >
+                  <a href={`#content-${category}`}>{category}</a>
+                </li>
+              </>
+              ): null
+            }
+            </>
           ))}
         </ul>
       ) : (
         ""
       )}
-      <IoChevronForwardOutline onClick={handleRightClick} className="text-3xl cursor-pointer" />
+      <IoChevronForwardOutline
+        onClick={handleRightClick}
+        className="text-3xl cursor-pointer"
+      />
     </div>
   );
 };
