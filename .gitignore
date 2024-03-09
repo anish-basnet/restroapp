@@ -1,0 +1,10 @@
+# for backend
+backend/.idea
+backend/venv
+
+
+
+
+# for frontend
+
+frontend/node_modules

@@ -1,0 +1,14 @@
+.ul-scrollbar li::-webkit-scrollbar{
+    display: none;
+}
+
+.ul-scrollbar{
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.ul-scrollbar li{
+    display: inline-block;
+}
