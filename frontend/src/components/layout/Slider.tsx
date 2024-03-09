@@ -37,12 +37,6 @@ export const Slider = () => {
   };
   const { productInfo } = useLoaderContext();
 
-  useEffect(() => {
-    console.log("Product Category from slider.tsx is ", productInfo);
-  }, [productInfo]);
-  if (!productInfo) {
-    return null;
-  }
 
   return (
     <div className="flex container-flex shadow-lg">
