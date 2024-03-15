@@ -47,10 +47,10 @@ export const Slider = () => {
       {productInfo && "payload" in productInfo ? (
         <ul className="ul-scrollbar" ref={containerRef}>
           <li className="truncate font-bold px-2 h-10 align-top text-orange-500">
-            <a href={`content-0`} className="relative">
+            <button className="relative">
               Popular
               <span className="absolute inset-x-0 bottom-0 h-[2.5px] bg-orange-500 translate-y-4 "></span>
-            </a>
+            </button>
           </li>
           {Object.keys(productInfo.payload).map((category) => (
             <>
@@ -61,7 +61,7 @@ export const Slider = () => {
                   className="font-bold truncate px-2 hover:cursor-pointer"
                   key={category}
                 >
-                  <a href={`#content-${category}`}>{category}</a>
+                  <button>{category}</button>
                 </li>
               </>
               ): null
